@@ -25,8 +25,9 @@
     }   \
 }while(0);
 
-#define PFM_ENSURE_DONE(cond)    do{ \
+#define PFM_ENSURE_DONE(cond, ret, err)    do{ \
     if(!(cond)){  \
+        (ret) = (err);  \
         goto done;  \
     }   \
 }while(0);
@@ -56,7 +57,7 @@ typedef struct list_node
 /* struct of list manager */
 typedef struct list
 {
-    LIST_NODE *headNode;        /*  */
+    LIST_NODE *headNode;        /* head node of list */
     int len;                    /* length of list, exclude headNode */
 }LIST;
 
@@ -71,13 +72,33 @@ typedef struct list
     param_out:  None
     output:     error code
 */
-RET_VAL listCreate();
+RET_VAL listCreate(OUT LIST *list);
 
 /*
     name:       listDestory
     brief:      destroy a list
-    param_in:   None
+    param_in:   list - ptr to list
     param_out:  None
     output:     error code
 */
-RET_VAL listDestory();
+RET_VAL listDestory(LIST *list);
+
+/*
+    name:       listLenGet
+    brief:      get length of a list, exclude listHead
+    param_in:   list - ptr to list
+    param_out:  listLen - ptr to length of list
+    output:     error code
+*/
+RET_VAL listLenGet(IN LIST *list, OUT int *listLen);
+
+/*
+    name:       listNodeAdd
+    brief:      add a node in idx of list
+    param_in:   list - ptr to list
+                pData - ptr to data of node
+                idx - index of node to add, idx start from 1
+    param_out:  None
+    output:     error code
+*/
+RET_VAL listNodeAdd(IN LIST *list, void *pData, IN int idx);
