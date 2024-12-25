@@ -58,58 +58,38 @@ static RET_VAL listNodeDestroy(IN LIST_NODE *listNode)
     function definition
 */
 
-/*
-    name:       listCreate
-    brief:      create a list
-    param_in:   list, should be NULL
-    param_out:  None
-    output:     error code
-*/
-RET_VAL listCreate(OUT LIST *list)
+RET_VAL listCreate(OUT LIST **list)
 {
-    LIST *listTmp = NULL;
     RET_VAL ret = RET_VAL_NO_ERROR;
     LIST_NODE *listHead = NULL;
 
-    PFM_ENSURE_RET(NULL == list, RET_VAL_BAD_PARAM);
+    PFM_ENSURE_RET((NULL != list) && (NULL == (*list)), RET_VAL_BAD_PARAM);
 
-    listTmp = (LIST*) malloc(sizeof(LIST));
-    if(NULL == listTmp)
+    (*list) = (LIST*) malloc(sizeof(LIST));
+    if(NULL == (*list))
     {
         ret = RET_VAL_NO_MEMORY;
         goto done;
     }
 
-    memset(listTmp, 0, sizeof(LIST));
+    memset((*list), 0, sizeof(LIST));
 
     /* create a dummy node as listHead */
     listHead = listNodeCreate(NULL);
     if(!listHead)
     {
-        free(listTmp);
+        free((*list));
         ret = RET_VAL_NO_MEMORY;
+        goto done;
     }
-    
-    listTmp->headNode = listHead;
-    listTmp->len = 0;
 
-    memcpy(list, listTmp, sizeof(LIST));
+    (*list)->headNode = listHead;
+    (*list)->len = 0;
 
 done:
     return ret;
 }
 
-/*
-    name:       listDestory
-    brief:      destroy a list
-    param_in:   None
-    param_out:  None
-    output:     error code
-    Others:
-
-              cur
-    HEAD  ->  A  ->  B  ->  C  ->  D  ->
-*/
 RET_VAL listDestory(IN LIST *list)
 {
     RET_VAL ret = RET_VAL_NO_ERROR;
@@ -129,17 +109,11 @@ RET_VAL listDestory(IN LIST *list)
 done:
     /* free dummy node */
     listNodeDestroy(list->headNode);
+
     free(list);
     return ret;
 }
 
-/*
-    name:       listLenGet
-    brief:      get length of a list, exclude listHead
-    param_in:   list - ptr to list
-    param_out:  listLen - ptr to length of list
-    output:     error code
-*/
 RET_VAL listLenGet(IN LIST *list, OUT int *listLen)
 {
     PFM_ENSURE_RET(NULL != list && NULL != listLen, RET_VAL_BAD_PARAM);
@@ -149,15 +123,6 @@ RET_VAL listLenGet(IN LIST *list, OUT int *listLen)
     return RET_VAL_NO_ERROR;
 }
 
-/*
-    name:       listNodeAdd
-    brief:      add a node in idx of list
-    param_in:   list - ptr to list
-                pData - ptr to data of node
-                idx - index of node to add, idx start from 1
-    param_out:  None
-    output:     error code
-*/
 RET_VAL listNodeAdd(IN LIST *list, void *pData, IN int idx)
 {
     int curIdx = 1;
@@ -180,6 +145,28 @@ RET_VAL listNodeAdd(IN LIST *list, void *pData, IN int idx)
     curNode->next = newNode;
 
     ++ (list->len);
+
+    return RET_VAL_NO_ERROR;
+}
+
+RET_VAL listNodeDel(IN LIST *list, IN int idx)
+{
+    LIST_NODE *preNode = NULL;
+    LIST_NODE *delNode = NULL;
+    int i = 1;
+
+    PFM_ENSURE_RET((NULL != list) && (idx > 0) && (idx <= list->len), RET_VAL_BAD_PARAM);
+
+    preNode = list->headNode;
+    for(i = 1; i < idx; ++ i)
+    {
+        preNode = preNode->next;
+    }
+
+    delNode = preNode->next;
+    preNode->next = delNode->next;
+
+    listNodeDestroy(delNode);
 
     return RET_VAL_NO_ERROR;
 }

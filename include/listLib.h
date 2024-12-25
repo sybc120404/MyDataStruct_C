@@ -3,7 +3,8 @@
     Data:   29Dec24
     Description:    C header of listLib
 */
-
+#ifndef _LIST_LIB__
+#define _LIST_LIB__
 /*==========================
     include files
 */
@@ -11,41 +12,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-/*==========================
-    macro definition
-*/
-
-#define IN
-#define OUT
-
-#define PFM_ENSURE_RET(cond, ret)    do{ \
-    if(!(cond)){  \
-        return (ret); \
-    }   \
-}while(0);
-
-#define PFM_ENSURE_DONE(cond, ret, err)    do{ \
-    if(!(cond)){  \
-        (ret) = (err);  \
-        goto done;  \
-    }   \
-}while(0);
+#include "err.h"
+#include "def.h"
 
 /*==========================
     typedef 
 */
-
-/* error code */
-typedef enum
-{
-    RET_VAL_NO_ERROR = 0,
-    RET_VAL_NULL_POINTER,
-    RET_VAL_BAD_PARAM,
-    RET_VAL_NO_MEMORY,
-
-    RET_VAL_END
-}RET_VAL;
 
 /* struct of list node */
 typedef struct list_node
@@ -72,7 +44,7 @@ typedef struct list
     param_out:  None
     output:     error code
 */
-RET_VAL listCreate(OUT LIST *list);
+RET_VAL listCreate(OUT LIST **list);
 
 /*
     name:       listDestory
@@ -102,3 +74,15 @@ RET_VAL listLenGet(IN LIST *list, OUT int *listLen);
     output:     error code
 */
 RET_VAL listNodeAdd(IN LIST *list, void *pData, IN int idx);
+
+/*
+    name:       listNodeDel
+    brief:      delete a node of idx of list
+    param_in:   list - ptr to list
+                idx - index of node to add, idx start from 1
+    param_out:  None
+    output:     error code
+*/
+RET_VAL listNodeDel(IN LIST *list, IN int idx);
+
+#endif

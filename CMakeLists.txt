@@ -6,6 +6,7 @@ project(MyProject VERSION 1.0)
 
 # 添加头文件搜索路径
 include_directories(${PROJECT_SOURCE_DIR}/include)
+include_directories(${PROJECT_SOURCE_DIR}/lib/include)
 
 # 添加源文件
 add_library(listLib src/listLib.c)    # 创建库目标listLib
