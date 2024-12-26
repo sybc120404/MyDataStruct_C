@@ -20,6 +20,7 @@ int main()
     int a = 1;
     int b = 2;
     int c = 3;
+    int d = 4;
 
     if(NULL != list)
     {
@@ -33,7 +34,9 @@ int main()
 
     listNodeAdd(list, &a, 1);
     listNodeAdd(list, &b, 2);
-    listNodeAdd(list, &c, 1);
+    listNodeAdd(list, &c, 3);
+    listNodeDel(list, 3);
+    listNodeAdd(list, &d, 3);
 
     listNodeForEach(list, printfInt);
 

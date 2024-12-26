@@ -163,6 +163,8 @@ RET_VAL listNodeDel(IN LIST *list, IN int idx)
     delNode = preNode->next;
     preNode->next = delNode->next;
 
+    -- (list->len);
+
     listNodeDestroy(delNode);
 
     return RET_VAL_NO_ERROR;
