@@ -33,6 +33,9 @@ typedef struct list
     int len;                    /* length of list, exclude headNode */
 }LIST;
 
+/* func for foreach */
+typedef void (*LIST_FOR_EACH_FUNC)(IN LIST_NODE*);        /* define a type:  LIST_FOR_EACH_FUNC -> void (*) (LIST_NODE*)*/
+
 /*==========================
     function declaration
 */
@@ -42,9 +45,9 @@ typedef struct list
     brief:      create a list
     param_in:   None
     param_out:  None
-    output:     error code
+    output:     ptr to list
 */
-RET_VAL listCreate(OUT LIST **list);
+LIST* listCreate();
 
 /*
     name:       listDestory
@@ -84,5 +87,15 @@ RET_VAL listNodeAdd(IN LIST *list, void *pData, IN int idx);
     output:     error code
 */
 RET_VAL listNodeDel(IN LIST *list, IN int idx);
+
+/*
+    name:       listNodeForEach
+    brief:      for each node, perform pFunc
+    param_in:   list - ptr to list
+                pFunc - ptr to function
+    param_out:  None
+    output:     error code
+*/
+RET_VAL listNodeForEach(IN LIST *list, IN LIST_FOR_EACH_FUNC pFunc);
 
 #endif

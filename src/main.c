@@ -1,10 +1,41 @@
 #include "listLib.h"
 
+static void printfInt(LIST_NODE *node)
+{
+    if(NULL != node && NULL != node->pData)
+    {
+        printf("data: %d\n", *(int*)(node->pData));
+    }
+    else
+    {
+        printf("-\n");
+    }
+
+    return;
+}
+
 int main()
 {
-    LIST *list = NULL;
+    LIST *list = listCreate();
+    int a = 1;
+    int b = 2;
+    int c = 3;
 
-    printf("rv = %d\n", listCreate(&list));
+    if(NULL != list)
+    {
+        printf("list create OK.\n");
+    }
+    else
+    {
+        printf("list create FAIL.\n");
+        return 0;
+    }
+
+    listNodeAdd(list, &a, 1);
+    listNodeAdd(list, &b, 2);
+    listNodeAdd(list, &c, 1);
+
+    listNodeForEach(list, printfInt);
 
     printf("rv = %d\n", listDestory(list));
 

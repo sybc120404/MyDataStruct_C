@@ -58,36 +58,33 @@ static RET_VAL listNodeDestroy(IN LIST_NODE *listNode)
     function definition
 */
 
-RET_VAL listCreate(OUT LIST **list)
+LIST* listCreate()
 {
-    RET_VAL ret = RET_VAL_NO_ERROR;
     LIST_NODE *listHead = NULL;
+    LIST *list = NULL;
 
-    PFM_ENSURE_RET((NULL != list) && (NULL == (*list)), RET_VAL_BAD_PARAM);
-
-    (*list) = (LIST*) malloc(sizeof(LIST));
-    if(NULL == (*list))
+    list = (LIST*) malloc(sizeof(LIST));
+    if(NULL == list)
     {
-        ret = RET_VAL_NO_MEMORY;
         goto done;
     }
 
-    memset((*list), 0, sizeof(LIST));
+    memset(list, 0, sizeof(LIST));
 
     /* create a dummy node as listHead */
     listHead = listNodeCreate(NULL);
     if(!listHead)
     {
-        free((*list));
-        ret = RET_VAL_NO_MEMORY;
+        free(list);
+        list = NULL;
         goto done;
     }
 
-    (*list)->headNode = listHead;
-    (*list)->len = 0;
+    list->headNode = listHead;
+    list->len = 0;
 
 done:
-    return ret;
+    return list;
 }
 
 RET_VAL listDestory(IN LIST *list)
@@ -138,7 +135,7 @@ RET_VAL listNodeAdd(IN LIST *list, void *pData, IN int idx)
     curNode = list->headNode;
     for(curIdx = 1; curIdx < idx; ++ curIdx)
     {
-        curNode = curNode;
+        curNode = curNode->next;
     }
 
     newNode->next = curNode->next;
@@ -167,6 +164,24 @@ RET_VAL listNodeDel(IN LIST *list, IN int idx)
     preNode->next = delNode->next;
 
     listNodeDestroy(delNode);
+
+    return RET_VAL_NO_ERROR;
+}
+
+RET_VAL listNodeForEach(IN LIST *list, IN LIST_FOR_EACH_FUNC pFunc)
+{
+    int i = 0;
+    LIST_NODE *curNode = NULL;
+
+    PFM_ENSURE_RET((NULL != list) && (NULL != pFunc), RET_VAL_BAD_PARAM);
+
+    curNode = list->headNode->next;
+
+    for(i = 0; i < list->len; ++ i)
+    {
+        pFunc(curNode);
+        curNode = curNode->next;
+    }
 
     return RET_VAL_NO_ERROR;
 }
