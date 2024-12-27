@@ -14,6 +14,7 @@
 #include <string.h>
 #include "err.h"
 #include "def.h"
+#include "debug.h"
 
 /*==========================
     typedef 
@@ -35,6 +36,8 @@ typedef struct list
 
 /* func for foreach */
 typedef void (*LIST_FOR_EACH_FUNC)(IN LIST_NODE*);        /* define a type:  LIST_FOR_EACH_FUNC -> void (*) (LIST_NODE*)*/
+/* func for compare */
+typedef void (*LIST_NODE_CMP_FUNC)(IN LIST_NODE*, IN LIST_NODE*);
 
 /*==========================
     function declaration
@@ -97,5 +100,15 @@ RET_VAL listNodeDel(IN LIST *list, IN int idx);
     output:     error code
 */
 RET_VAL listNodeForEach(IN LIST *list, IN LIST_FOR_EACH_FUNC pFunc);
+
+/*
+    name:       listSort
+    brief:      sort list node
+    param_in:   list - ptr to list
+                pFunc - ptr to cmp function
+    param_out:  None
+    output:     error code
+*/
+RET_VAL listSort(IN LIST *list, IN LIST_NODE_CMP_FUNC pFunc);
 
 #endif

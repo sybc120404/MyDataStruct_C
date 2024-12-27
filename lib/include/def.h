@@ -30,9 +30,4 @@
     }   \
 }while(0);
 
-/* debug, always printf */
-#define DBG_ALZ()   do{ \
-    printf("%s %d.\n", __func__, __LINE__); \
-}while(0);
-
 #endif

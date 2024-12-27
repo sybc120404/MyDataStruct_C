@@ -187,3 +187,10 @@ RET_VAL listNodeForEach(IN LIST *list, IN LIST_FOR_EACH_FUNC pFunc)
 
     return RET_VAL_NO_ERROR;
 }
+
+RET_VAL listSort(IN LIST *list, IN LIST_NODE_CMP_FUNC pFunc)
+{
+    PFM_ENSURE_RET(NULL != list && NULL != pFunc, RET_VAL_BAD_PARAM);
+
+    return RET_VAL_NO_ERROR;
+}
