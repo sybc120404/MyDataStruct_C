@@ -34,6 +34,10 @@ static LIST_NODE* listNodeCreate(IN void *pData)
         memset(listNode, 0, sizeof(LIST_NODE));
         listNode->pData = pData;
     }
+    else
+    {
+        DBG_ERR("create listNode failed");
+    }
 
     return listNode;
 }
@@ -66,6 +70,7 @@ LIST* listCreate()
     list = (LIST*) malloc(sizeof(LIST));
     if(NULL == list)
     {
+        DBG_ERR("alloc space of list failed");
         goto done;
     }
 
@@ -75,6 +80,7 @@ LIST* listCreate()
     listHead = listNodeCreate(NULL);
     if(!listHead)
     {
+        DBG_ERR("alloc space of list node for head of list failed");
         free(list);
         list = NULL;
         goto done;
@@ -116,6 +122,8 @@ RET_VAL listLenGet(IN LIST *list, OUT int *listLen)
     PFM_ENSURE_RET(NULL != list && NULL != listLen, RET_VAL_BAD_PARAM);
 
     *listLen = list->len;
+
+    DBG("get length of list: %d", *listLen);
 
     return RET_VAL_NO_ERROR;
 }
@@ -170,6 +178,71 @@ RET_VAL listNodeDel(IN LIST *list, IN int idx)
     return RET_VAL_NO_ERROR;
 }
 
+RET_VAL listNodeGetByIdx(IN LIST *list, IN int idx, IN size_t dataSize, OUT void* pData)
+{
+    int iter = 0;
+    LIST_NODE *curNode = NULL;
+
+    PFM_ENSURE_RET((NULL != list) && (NULL != pData) && (idx <= (list->len)), RET_VAL_BAD_PARAM);
+
+    curNode = list->headNode;
+    for(iter = 0; iter < idx; ++ iter)
+    {
+        curNode = curNode->next;
+    }
+
+    memcpy(pData, curNode->pData, dataSize);
+
+    return RET_VAL_NO_ERROR;
+}
+
+RET_VAL listNodeSetByIdx(IN LIST *list, IN int idx, IN size_t dataSize, IN void* pData)
+{
+    int iter = 0;
+    LIST_NODE *curNode = NULL;
+
+    PFM_ENSURE_RET((NULL != list) && (NULL != pData) && (idx <= (list->len)), RET_VAL_BAD_PARAM);
+
+    curNode = list->headNode;
+    for(iter = 0; iter < idx; ++ iter)
+    {
+        curNode = curNode->next;
+    }
+
+    memcpy(curNode->pData, pData, dataSize);
+
+    return RET_VAL_NO_ERROR;
+}
+
+RET_VAL listNodeIsExist(IN LIST *list, IN size_t dataSize, IN void* pData, OUT int *exist)
+{
+    RET_VAL ret = RET_VAL_NO_ERROR;
+    LIST_NODE *curNode = NULL;
+
+    PFM_ENSURE_DONE((NULL != list) && (NULL != pData) && (NULL != exist), ret, RET_VAL_BAD_PARAM);
+
+    if(0 == list->len)
+    {
+        *exist = 0;
+        goto done;
+    }
+
+    curNode = list->headNode->next;
+    while(curNode)
+    {
+        if(0 == memcmp(pData, curNode->pData, dataSize))
+        {
+            *exist = 1;
+            goto done;
+        }
+        curNode = curNode->next;
+    }
+    *exist = 0;
+
+done:
+    return ret;
+}
+
 RET_VAL listNodeForEach(IN LIST *list, IN LIST_FOR_EACH_FUNC pFunc)
 {
     int i = 0;
@@ -184,13 +257,6 @@ RET_VAL listNodeForEach(IN LIST *list, IN LIST_FOR_EACH_FUNC pFunc)
         pFunc(curNode);
         curNode = curNode->next;
     }
-
-    return RET_VAL_NO_ERROR;
-}
-
-RET_VAL listSort(IN LIST *list, IN LIST_NODE_CMP_FUNC pFunc)
-{
-    PFM_ENSURE_RET(NULL != list && NULL != pFunc, RET_VAL_BAD_PARAM);
 
     return RET_VAL_NO_ERROR;
 }

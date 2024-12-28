@@ -92,6 +92,40 @@ RET_VAL listNodeAdd(IN LIST *list, void *pData, IN int idx);
 RET_VAL listNodeDel(IN LIST *list, IN int idx);
 
 /*
+    name:       listNodeGetByIdx
+    brief:      get a node of idx of list
+    param_in:   list - ptr to list
+                idx - index of node to add, idx start from 1
+                dataSize - sizeof(data)
+    param_out:  pData   - pointer of data
+    output:     error code
+*/
+RET_VAL listNodeGetByIdx(IN LIST *list, IN int idx, IN size_t dataSize, OUT void* pData);
+
+/*
+    name:       listNodeSetByIdx
+    brief:      set data of a node of idx of list
+    param_in:   list - ptr to list
+                idx - index of node to add, idx start from 1
+                dataSize - sizeof(data)
+                pData   - pointer of data
+    param_out:  None
+    output:     error code
+*/
+RET_VAL listNodeSetByIdx(IN LIST *list, IN int idx, IN size_t dataSize, IN void* pData);
+
+/*
+    name:       listNodeIsExist
+    brief:      check if list node exist in list, by data
+    param_in:   list - ptr to list
+                dataSize - sizeof(data)
+                pData   - pointer of data
+    param_out:  exist - pointer to result, 1-exist, 0-not_exist
+    output:     error code
+*/
+RET_VAL listNodeIsExist(IN LIST *list, IN size_t dataSize, IN void* pData, OUT int *exist);
+
+/*
     name:       listNodeForEach
     brief:      for each node, perform pFunc
     param_in:   list - ptr to list
@@ -100,15 +134,5 @@ RET_VAL listNodeDel(IN LIST *list, IN int idx);
     output:     error code
 */
 RET_VAL listNodeForEach(IN LIST *list, IN LIST_FOR_EACH_FUNC pFunc);
-
-/*
-    name:       listSort
-    brief:      sort list node
-    param_in:   list - ptr to list
-                pFunc - ptr to cmp function
-    param_out:  None
-    output:     error code
-*/
-RET_VAL listSort(IN LIST *list, IN LIST_NODE_CMP_FUNC pFunc);
 
 #endif
