@@ -4,6 +4,7 @@
 CMakeFiles/myList.dir/src/main.c.o
  /home/cai/share/codeSpace/myList/src/main.c
  /home/cai/share/codeSpace/myList/include/listLib.h
+ /home/cai/share/codeSpace/myList/lib/include/debug.h
  /home/cai/share/codeSpace/myList/lib/include/def.h
  /home/cai/share/codeSpace/myList/lib/include/err.h
  /usr/include/alloca.h

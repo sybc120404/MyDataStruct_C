@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/myList.dir/src/main.c.o -o myList  liblistLib.a 

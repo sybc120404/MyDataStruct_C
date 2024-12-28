@@ -42,5 +42,9 @@ int main()
 
     printf("rv = %d\n", listDestory(list));
 
+    DBG("common printf: %s", "hello world");
+    DBG_ALZ("always printf");
+    DBG_ERR("error fail");
+
     return 0;
 }

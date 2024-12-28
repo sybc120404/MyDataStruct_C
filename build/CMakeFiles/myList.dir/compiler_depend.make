@@ -3,6 +3,7 @@
 
 CMakeFiles/myList.dir/src/main.c.o: /home/cai/share/codeSpace/myList/src/main.c \
   /home/cai/share/codeSpace/myList/include/listLib.h \
+  /home/cai/share/codeSpace/myList/lib/include/debug.h \
   /home/cai/share/codeSpace/myList/lib/include/def.h \
   /home/cai/share/codeSpace/myList/lib/include/err.h \
   /usr/include/alloca.h \
@@ -69,9 +70,7 @@ CMakeFiles/myList.dir/src/main.c.o: /home/cai/share/codeSpace/myList/src/main.c 
 
 /usr/include/x86_64-linux-gnu/sys/types.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h:
-
-/usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
+/usr/include/x86_64-linux-gnu/sys/select.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdio_lim.h:
 
@@ -82,6 +81,12 @@ CMakeFiles/myList.dir/src/main.c.o: /home/cai/share/codeSpace/myList/src/main.c 
 /usr/include/x86_64-linux-gnu/bits/types.h:
 
 /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h:
+
+/usr/include/x86_64-linux-gnu/bits/struct_mutex.h:
+
+/usr/include/strings.h:
+
+/usr/include/x86_64-linux-gnu/bits/floatn-common.h:
 
 /usr/include/x86_64-linux-gnu/bits/floatn.h:
 
@@ -97,25 +102,23 @@ CMakeFiles/myList.dir/src/main.c.o: /home/cai/share/codeSpace/myList/src/main.c 
 
 /usr/include/x86_64-linux-gnu/bits/types/FILE.h:
 
+/home/cai/share/codeSpace/myList/lib/include/debug.h:
+
+/usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
+
 /usr/include/x86_64-linux-gnu/bits/select.h:
 
 /usr/include/x86_64-linux-gnu/bits/endianness.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/timer_t.h:
+
+/usr/include/endian.h:
 
 /usr/include/x86_64-linux-gnu/bits/typesizes.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_FILE.h:
 
 /home/cai/share/codeSpace/myList/lib/include/err.h:
-
-/usr/include/x86_64-linux-gnu/bits/floatn-common.h:
-
-/usr/include/strings.h:
-
-/usr/include/x86_64-linux-gnu/bits/struct_mutex.h:
-
-/usr/include/endian.h:
-
-/usr/include/x86_64-linux-gnu/bits/types/timer_t.h:
 
 /usr/include/alloca.h:
 
@@ -130,8 +133,6 @@ CMakeFiles/myList.dir/src/main.c.o: /home/cai/share/codeSpace/myList/src/main.c 
 /usr/include/x86_64-linux-gnu/bits/types/locale_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/wordsize.h:
-
-/usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
 
 /usr/include/x86_64-linux-gnu/bits/stdlib-float.h:
 
@@ -152,6 +153,10 @@ CMakeFiles/myList.dir/src/main.c.o: /home/cai/share/codeSpace/myList/src/main.c 
 /usr/include/x86_64-linux-gnu/bits/uintn-identity.h:
 
 /usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
+
+/usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h:
+
+/usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
 
 /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
 
@@ -186,5 +191,3 @@ CMakeFiles/myList.dir/src/main.c.o: /home/cai/share/codeSpace/myList/src/main.c 
 /usr/include/x86_64-linux-gnu/bits/waitflags.h:
 
 /usr/include/x86_64-linux-gnu/bits/waitstatus.h:
-
-/usr/include/x86_64-linux-gnu/sys/select.h:
