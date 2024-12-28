@@ -48,4 +48,7 @@ typedef struct list
 - `RET_VAL listDestory(LIST *list)`：销毁一个链表
 - `RET_VAL listNodeAdd(IN LIST *list, void *pData, IN int idx)`：指定位置处加入新链表节点，idx从1开始
 - `RET_VAL listNodeDel(IN LIST *list, IN int idx)`：删除idx位置处的节点，idx从1开始
+- `RET_VAL listNodeGetByIdx(IN LIST *list, IN int idx, IN size_t dataSize, OUT void* pData)`：获取idx位置节点的data
+- `RET_VAL listNodeSetByIdx(IN LIST *list, IN int idx, IN size_t dataSize, IN void* pData)`：设置idx位置节点的data
+- `RET_VAL listNodeIsExist(IN LIST *list, IN size_t dataSize, IN void* pData, OUT int *exist)`：判断是否存在data节点
 - `RET_VAL listNodeForEach(IN LIST *list, IN LIST_FOR_EACH_FUNC pFunc)`：对于每一个节点，执行pFunc操作，pFunc是一个函数指针，详见定义
