@@ -14,14 +14,18 @@ set(CAMKE_CXX_FLAGS_CUnit "-lcunit -lncurses")
 # 添加头文件搜索路径
 include_directories(${PROJECT_SOURCE_DIR}/include)
 include_directories(${PROJECT_SOURCE_DIR}/lib/include)
-include_directories(/home/csy/cunit/include)
 
 # 添加源文件
 add_library(listLib src/listLib.c)    # 创建库目标listLib
+add_library(lockLib src/lockLib.c)    # 创建库目标lockLib
+
+# 添加可执行文件
 add_executable(testMyList src/testMyList.c) # 创建可执行文件目标myList
+add_executable(testLock src/testLock.c) # 创建可执行文件目标testLock
 
 # 添加第三方静态库目录
 link_directories(/home/csy/cunit/lib)
 
 # 链接库到可执行文件
 target_link_libraries(testMyList listLib libcunit.a libcunit.so)
+target_link_libraries(testLock lockLib)

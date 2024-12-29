@@ -46,10 +46,12 @@
     printf(DBG_FMT_BOLD_RED_YEL "[%s]<%s, %d> - " format DBG_FMT_END "\r\n", __FILE__, __func__, __LINE__, ##__VA_ARGS__);  \
 }while(0);
 #else
-#define DBG(...)
+#define DBG(format, ...)
 #define DBG_ALZ(format, ...)    do{ \
     printf(DBG_FMT_RED "[%s]<%s, %d> - " format DBG_FMT_END "\r\n", __FILE__, __func__, __LINE__, ##__VA_ARGS__);  \
 }while(0);
-#define DBG_ERR(format, ...)
+#define DBG_ERR(format, ...)    do{ \
+    printf(DBG_FMT_BOLD_RED_YEL "[%s]<%s, %d> - " format DBG_FMT_END "\r\n", __FILE__, __func__, __LINE__, ##__VA_ARGS__);  \
+}while(0);
 #endif
 #endif

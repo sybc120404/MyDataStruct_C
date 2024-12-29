@@ -18,6 +18,7 @@ typedef enum
     RET_VAL_NULL_POINTER,   /* null pointer */
     RET_VAL_BAD_PARAM,      /* bad param */
     RET_VAL_NO_MEMORY,      /* no memory */
+    RET_VAL_SYS_ERR,        /* system error */
 
     RET_VAL_END
 }RET_VAL;
