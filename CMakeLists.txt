@@ -18,10 +18,12 @@ include_directories(${PROJECT_SOURCE_DIR}/lib/include)
 # 添加源文件
 add_library(listLib src/listLib.c)    # 创建库目标listLib
 add_library(lockLib src/lockLib.c)    # 创建库目标lockLib
+add_library(rpcLib src/rpcLib.c)      # 创建库目标rpcLib
 
 # 添加可执行文件
 add_executable(testMyList src/testMyList.c) # 创建可执行文件目标myList
 add_executable(testLock src/testLock.c) # 创建可执行文件目标testLock
+add_executable(testRpc src/testRpc.c) # 创建可执行文件目标testRpc
 
 # 添加第三方静态库目录
 link_directories(/home/csy/cunit/lib)
@@ -29,3 +31,9 @@ link_directories(/home/csy/cunit/lib)
 # 链接库到可执行文件
 target_link_libraries(testMyList listLib libcunit.a libcunit.so)
 target_link_libraries(testLock lockLib)
+target_link_libraries(testRpc rpcLib)
+
+# 针对不同的目标使用不同的编译选项
+target_compile_options(testMyList PRIVATE ${CMAKE_CXX_FLAG_OPT} ${CMAKE_CXX_FLAG_WARN} ${CMAKE_CXX_FLAGS_CUnit})
+target_compile_options(testLock PRIVATE ${CMAKE_CXX_FLAG_WARN} ${CMAKE_CXX_FLAG_OPT})
+target_compile_options(testRpc PRIVATE ${CMAKE_CXX_FLAG_WARN} ${CMAKE_CXX_FLAG_OPT})
