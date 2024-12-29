@@ -2,6 +2,17 @@
 
 本项目是一个通用链表
 
+### 运行环境
+
+本项目使用CUnit进行接口测试，需要保证运行环境安装Cunit，并且需要修改CMakeLists.txt进行正确链接
+```
+# 添加第三方静态库目录
+link_directories(/home/csy/cunit/lib)   # cunit lib目录
+
+# 链接库到可执行文件
+target_link_libraries(testMyList listLib libcunit.a libcunit.so) # 添加cunit静态、动态库
+```
+
 ### 构建方法
 
 ```bash
@@ -9,7 +20,7 @@ mkdir build
 cd build
 cmake ..
 make
-./myList
+./testMyList
 ```
 
 ### 设计文档

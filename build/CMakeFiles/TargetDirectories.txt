@@ -1,4 +1,0 @@
-/home/cai/share/codeSpace/myList/build/CMakeFiles/listLib.dir
-/home/cai/share/codeSpace/myList/build/CMakeFiles/myList.dir
-/home/cai/share/codeSpace/myList/build/CMakeFiles/edit_cache.dir
-/home/cai/share/codeSpace/myList/build/CMakeFiles/rebuild_cache.dir
