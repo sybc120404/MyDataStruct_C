@@ -109,11 +109,11 @@ RET_VAL listDestory(IN LIST *list)
         listNodeDestroy(curNode);
     }
 
-done:
     /* free dummy node */
     listNodeDestroy(list->headNode);
-
     free(list);
+
+done:
     return ret;
 }
 
