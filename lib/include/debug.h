@@ -31,7 +31,7 @@
 
 /* DEBUG */
 /* 0-close, 1-open */
-#define DBG_ON  (1)
+#define DBG_ON  (0)
 #if DBG_ON
 /* normal debug */
 #define DBG(format, ...) do{ \
@@ -47,7 +47,7 @@
 }while(0);
 #else
 #define DBG(...)
-#define DBG_ALZ(...)    do{ \
+#define DBG_ALZ(format, ...)    do{ \
     printf(DBG_FMT_RED "[%s]<%s, %d> - " format DBG_FMT_END "\r\n", __FILE__, __func__, __LINE__, ##__VA_ARGS__);  \
 }while(0);
 #define DBG_ERR(format, ...)

@@ -95,7 +95,7 @@ RET_VAL listNodeDel(IN LIST *list, IN int idx);
     name:       listNodeGetByIdx
     brief:      get a node of idx of list
     param_in:   list - ptr to list
-                idx - index of node to add, idx start from 1
+                idx - index of node to get, idx start from 1
                 dataSize - sizeof(data)
     param_out:  pData   - pointer of data
     output:     error code
@@ -134,5 +134,8 @@ RET_VAL listNodeIsExist(IN LIST *list, IN size_t dataSize, IN void* pData, OUT i
     output:     error code
 */
 RET_VAL listNodeForEach(IN LIST *list, IN LIST_FOR_EACH_FUNC pFunc);
+
+/* demo of printf list */
+void listPrintfIntDemo(LIST *list);
 
 #endif

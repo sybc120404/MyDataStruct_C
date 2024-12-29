@@ -20,7 +20,7 @@ mkdir build
 cd build
 cmake ..
 make
-./testMyList
+valgrind --leak-check=full ./testMyList     // 检查内容泄露，需要安装valgrind
 ```
 
 ### 设计文档
@@ -63,3 +63,4 @@ typedef struct list
 - `RET_VAL listNodeSetByIdx(IN LIST *list, IN int idx, IN size_t dataSize, IN void* pData)`：设置idx位置节点的data
 - `RET_VAL listNodeIsExist(IN LIST *list, IN size_t dataSize, IN void* pData, OUT int *exist)`：判断是否存在data节点
 - `RET_VAL listNodeForEach(IN LIST *list, IN LIST_FOR_EACH_FUNC pFunc)`：对于每一个节点，执行pFunc操作，pFunc是一个函数指针，详见定义
+- `RET_VAL listPrintfDemo()`：打印链表的demo，实际上应该使用链表的用户自己定义

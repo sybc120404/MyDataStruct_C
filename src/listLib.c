@@ -134,7 +134,7 @@ RET_VAL listNodeAdd(IN LIST *list, void *pData, IN int idx)
     LIST_NODE *curNode = NULL;
     LIST_NODE *newNode = NULL;
 
-    PFM_ENSURE_RET((NULL != list) && (idx > 0) && (idx <= (list->len+1)), RET_VAL_BAD_PARAM);
+    PFM_ENSURE_RET(((NULL != list) && (idx > 0) && (idx <= (list->len+1))), RET_VAL_BAD_PARAM);
 
     newNode = listNodeCreate(pData);
     PFM_ENSURE_RET(NULL != newNode, RET_VAL_NO_MEMORY);
@@ -183,7 +183,7 @@ RET_VAL listNodeGetByIdx(IN LIST *list, IN int idx, IN size_t dataSize, OUT void
     int iter = 0;
     LIST_NODE *curNode = NULL;
 
-    PFM_ENSURE_RET((NULL != list) && (NULL != pData) && (idx <= (list->len)), RET_VAL_BAD_PARAM);
+    PFM_ENSURE_RET((NULL != list) && (NULL != pData) && (idx > 0) && (idx <= (list->len)), RET_VAL_BAD_PARAM);
 
     curNode = list->headNode;
     for(iter = 0; iter < idx; ++ iter)
@@ -259,4 +259,18 @@ RET_VAL listNodeForEach(IN LIST *list, IN LIST_FOR_EACH_FUNC pFunc)
     }
 
     return RET_VAL_NO_ERROR;
+}
+
+/* for demo, printf int */
+static inline void printfNodeInt(LIST_NODE *listNode) {
+    if(NULL != listNode && NULL != listNode->pData)
+        printf("(%d)->", *(int*)(listNode->pData));
+}
+void listPrintfIntDemo(LIST *list)
+{
+    printf("show list: ");
+    if(NULL != list)
+        listNodeForEach(list, printfNodeInt);
+    printf("\r\n");
+    return;
 }
